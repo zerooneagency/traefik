@@ -1,0 +1,33 @@
+[global]
+  sendAnonymousUsage = false
+
+[log]
+  level = "INFO" #DEBUG, INFO, WARN, ERROR, FATAL, PANIC
+  format = "common"
+
+[entryPoints]
+  [entryPoints.web]
+    address = ":80"
+
+  [entryPoints.web-secure]
+    address = ":443"
+
+[providers]
+  [providers.file]
+    filename = "/etc/traefik/traefik.config.toml"
+    watch = true
+
+  [providers.docker]
+    exposedbydefault = false
+
+[certificatesResolvers.acme.acme]
+  email = "abiavati@gmail.com"
+  storage = "/etc/letsencrypt/acme.json"
+  # caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
+
+  [certificatesResolvers.acme.acme.httpChallenge]
+    entryPoint = "web"
+
+[api]
+  insecure = true
+  dashboard = true

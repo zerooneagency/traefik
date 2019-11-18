@@ -1,0 +1,21 @@
+version: "3.3"
+
+services:
+  proxy:
+    image: traefik
+    networks:
+      - proxy
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik.toml:/etc/traefik/traefik.toml # Traefik static config
+      - ./traefik.config.toml:/etc/traefik/traefik.config.toml # Traefik dynamic config
+      - ./letsencrypt:/etc/letsencrypt
+      - ./certs:/etc/certs # SSL Development certificates
+
+networks:
+  proxy:
+    driver: bridge
