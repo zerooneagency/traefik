@@ -1,9 +1,9 @@
-# [Traefik Proxy for Local Development](https://reactjs.org/)
+# Traefik Proxy for Local Development
 
 Prerequisites:
 
-- [mkcert](https://github.com/FiloSottile/mkcert)
 - [Docker](https://www.docker.com/)
+- [mkcert](https://github.com/FiloSottile/mkcert):
 
 Setup:
 
