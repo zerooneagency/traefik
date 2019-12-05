@@ -20,14 +20,6 @@
   [providers.docker]
     exposedbydefault = false
 
-[certificatesResolvers.acme.acme]
-  email = "abiavati@gmail.com"
-  storage = "/etc/letsencrypt/acme.json"
-  # caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
-
-  [certificatesResolvers.acme.acme.httpChallenge]
-    entryPoint = "web"
-
 [api]
   insecure = true
   dashboard = true
