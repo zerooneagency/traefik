@@ -1,3 +1,4 @@
-certs
+certs/*
+!certs/.gitkeep
 letsencrypt
 traefik.config.toml
