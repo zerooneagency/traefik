@@ -12,6 +12,12 @@
   [entryPoints.web-secure]
     address = ":443"
 
+  [entryPoints.postgres]
+    address = ":5432"
+
+  [entryPoints.mysql]
+    address = ":3306"
+
 [providers]
   [providers.file]
     filename = "/etc/traefik/traefik.config.toml"
