@@ -8,15 +8,12 @@ services:
     ports:
       - "80:80"
       - "443:443"
-      - "5432:5432"
-      - "3306:3306"
-      - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./traefik.toml:/etc/traefik/traefik.toml # Traefik static config
-      - ./traefik.config.toml:/etc/traefik/traefik.config.toml # Traefik dynamic config
+      - ./traefik.toml:/etc/traefik/traefik.toml
+      - ./dynamic:/etc/traefik/dynamic
       - ./letsencrypt:/etc/letsencrypt
-      - ./certs:/etc/certs # SSL Development certificates
+      - ./certs:/etc/certs
 
 networks:
   proxy:

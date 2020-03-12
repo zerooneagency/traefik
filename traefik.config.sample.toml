@@ -1,4 +1,0 @@
-[tls]
-  # [[tls.certificates]]
-  #   certFile = "/etc/certs/example.test+1.pem"
-  #   keyFile = "/etc/certs/example.test+1-key.pem"

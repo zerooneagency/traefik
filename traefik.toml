@@ -20,7 +20,7 @@
 
 [providers]
   [providers.file]
-    filename = "/etc/traefik/traefik.config.toml"
+    directory = "/etc/traefik/dynamic"
     watch = true
 
   [providers.docker]

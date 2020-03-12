@@ -1,0 +1,42 @@
+#!/bin/bash
+
+set -e
+
+domains_file_path=$HOME/.traefik_domains
+traefik_parent_path=${CODE_DIR:-$HOME/code}
+traefik_path=$traefik_parent_path/traefik
+
+# clone repository
+if [ ! -d $traefik_path ]
+  mkdir -p $traefik_parent_path
+  git clone git@github.com:zerooneagency/traefik.git $traefik_path
+fi
+
+# Add new domains to file
+touch $domains_file_path
+generate_cert=""
+for domain in "$@"
+do
+  if ! grep -Fxq "$domain" $domains_file_path
+  then
+    echo "$domain" >> $domains_file_path
+    generate_cert="true"
+  fi
+done
+
+# generate certificates
+if [[ ! -z "$generate_cert" ]] or [[ ! -f $traefik_path/certs/localhost.pem ]]; then
+  hosts="localhost 127.0.0.1 ::1"
+
+  while IFS= read -r host;
+  do
+    if [[ ! -z "$host" ]]; then
+      hosts="$hosts $host *.$host"
+    fi
+  done < $domains_file_path
+
+  mkcert -cert-file $traefik_path/certs/localhost.pem -key-file $traefik_path/certs/localhost-key.pem $hosts
+fi
+
+# start docker
+docker-compose -f $traefik_path/docker-compose.yml up -d
