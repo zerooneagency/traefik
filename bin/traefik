@@ -13,7 +13,7 @@ set -e
 
 domains_file_path=$HOME/.traefik_domains
 traefik_parent_path=${CODE_DIR:-$HOME/code}
-traefik_path=$traefik_parent_path/traefik
+traefik_path=${TRAEFIK_DIR:-$traefik_parent_path/.traefik}
 
 # clone repository
 if [ ! -d $traefik_path ]
