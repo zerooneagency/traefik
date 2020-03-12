@@ -17,6 +17,7 @@ traefik_path=$traefik_parent_path/traefik
 
 # clone repository
 if [ ! -d $traefik_path ]
+then
   mkdir -p $traefik_parent_path
   git clone git@github.com:zerooneagency/traefik.git $traefik_path
 fi
@@ -34,7 +35,7 @@ do
 done
 
 # generate certificates
-if [[ ! -z "$generate_cert" ]] or [[ ! -f $traefik_path/certs/localhost.pem ]]; then
+if [[ ! -z "$generate_cert" ]] || [[ ! -f $traefik_path/certs/localhost.pem ]]; then
   hosts="localhost 127.0.0.1 ::1"
 
   while IFS= read -r host;
