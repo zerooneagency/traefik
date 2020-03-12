@@ -7,23 +7,14 @@ Prerequisites:
 
 Setup:
 
-1. Use `mkcert` to generate local SSL certificates for your test domain:
+**via curl**
 
-```bash
-cd certs && mkcert example.test "*.example.test"
+```sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik)"
 ```
 
-2. Copy `traefik.config.sample.toml` to `traefik.config.toml` and add your own SSL certificates
-3. Add the certificate config to `traefik.config.toml`:
+**via wget**
 
-```toml
-  [[tls.certificates]]
-    certFile = "/etc/certs/example.test+1.pem"
-    keyFile = "/etc/certs/example.test+1-key.pem"
-```
-
-4. Start docker compose:
-
-```bash
-docker-compose up -d
+```sh
+sh -c "$(wget -O- https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik)"
 ```
