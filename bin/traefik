@@ -11,9 +11,9 @@
 #
 set -e
 
-domains_file_path=$HOME/.traefik_domains
 traefik_parent_path=${CODE_DIR:-$HOME/code}
 traefik_path=${TRAEFIK_DIR:-$traefik_parent_path/.traefik}
+domains_file_path=$traefik_path/.domains
 
 # clone repository
 if [ ! -d $traefik_path ]
@@ -46,6 +46,9 @@ if [[ ! -z "$generate_cert" ]] || [[ ! -f $traefik_path/certs/localhost.pem ]]; 
   done < $domains_file_path
 
   mkcert -cert-file $traefik_path/certs/localhost.pem -key-file $traefik_path/certs/localhost-key.pem $hosts
+
+  # restart docker
+  docker-compose -f $traefik_path/docker-compose.yml down
 fi
 
 # start docker
