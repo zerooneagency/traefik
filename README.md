@@ -7,13 +7,13 @@ Run the one-line installation script below.
 **via curl**
 
 ```sh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/zerooneagency/traefik/v0.0.2/bin/traefik-setup.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik-setup.sh)"
 ```
 
 **via wget**
 
 ```sh
-sh -c "$(wget -O- https://raw.githubusercontent.com/zerooneagency/traefik/v0.0.2/bin/traefik-setup.sh)"
+sh -c "$(wget -O- https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik-setup.sh)"
 ```
 
 > Traefik will be installed under the `~/.traefik/` folder.
