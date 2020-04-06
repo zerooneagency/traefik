@@ -24,6 +24,20 @@ function title {
   echo ""
 }
 
+function setup_traefik {
+  traefik_path="${CODE_DIR:-$HOME}/.traefik"
+
+  # clone repository
+  if [ ! -d $traefik_path ]
+  then
+    title "Cloning Traefik repository to $traefik_path"
+    mkdir -p $traefik_path
+    git clone https://github.com/zerooneagency/traefik.git $traefik_path
+  fi
+
+  $traefik_path/bin/traefik.sh $@
+}
+
 function setup {
   # Install Homebrew
   title "Installing Homebrew..."
@@ -59,12 +73,7 @@ EOS
 
   # get Traefik repo
   title "Installing Traefik..."
-  domain=${1:-}
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik $domain)"
-
-  # install root certificate
-  title "Installing root certificate..."
-  mkcert -install
+  setup_traefik $@
 
   # setup DNS
   title "Setting up DNSMasq..."
@@ -133,4 +142,4 @@ EOS
   fi
 }
 
-setup
+setup $@

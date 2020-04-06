@@ -31,8 +31,9 @@ function setup_traefik {
   # clone repository
   if [ ! -d $traefik_path ]
   then
+    title "Cloning Traefik repository to $traefik_path"
     mkdir -p $traefik_path
-    git clone git@github.com:zerooneagency/traefik.git $traefik_path
+    git clone https://github.com/zerooneagency/traefik.git $traefik_path
   fi
 
   # Add new domains to file
@@ -40,8 +41,10 @@ function setup_traefik {
   generate_cert=""
   for domain in "$@"
   do
+    title "Setting up domains..."
     if ! grep -Fxq "$domain" $domains_file_path
     then
+      echo "Adding $domain domain"
       echo "$domain" >> $domains_file_path
       generate_cert="true"
     fi
@@ -49,6 +52,7 @@ function setup_traefik {
 
   # generate certificates
   if [[ ! -z "$generate_cert" ]] || [[ ! -f $traefik_path/certs/localhost.pem ]]; then
+    title "Generating SSL certificate..."
     hosts="localhost 127.0.0.1 ::1"
 
     while IFS= read -r host;
@@ -60,7 +64,12 @@ function setup_traefik {
 
     mkcert -cert-file $traefik_path/certs/localhost.pem -key-file $traefik_path/certs/localhost-key.pem $hosts
 
+    # install root certificate
+    title "Installing root certificate..."
+    mkcert -install
+
     # restart docker
+    title "Restarting Traefik..."
     docker-compose -f $traefik_path/docker-compose.yml down
   fi
 
