@@ -1,12 +1,12 @@
 #!/bin/sh
 #
 # This script should be run via curl:
-#   sh -c "$(curl -fsSL https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik-setup.sh)"
+#   sh -c "$(curl -fsSL https://raw.githubusercontent.com/zerooneagency/traefik/v0.0.2/bin/traefik-setup.sh)"
 # or wget:
-#   sh -c "$(wget -qO- https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik-setup.sh)"
+#   sh -c "$(wget -qO- https://raw.githubusercontent.com/zerooneagency/traefik/v0.0.2/bin/traefik-setup.sh)"
 #
 # As an alternative, you can first download the install script and run it afterwards:
-#   wget https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik-setup.sh
+#   wget https://raw.githubusercontent.com/zerooneagency/traefik/v0.0.2/bin/traefik-setup.sh
 #   ./traefik-setup.sh
 #
 
@@ -63,7 +63,7 @@ EOS
 
   # get Traefik repo
   title "Installing Traefik..."
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik) $@"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/zerooneagency/traefik/v0.0.2/bin/traefik) $@"
 
   # setup DNS
   title "Setting up DNSMasq..."
@@ -133,7 +133,7 @@ EOS
 
     # get Traefik repo
     title "Installing Traefik..."
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik) $@"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/zerooneagency/traefik/v0.0.2/bin/traefik) $@"
   fi
 }
 
