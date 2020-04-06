@@ -71,6 +71,7 @@ EOS
   then
     echo "Creating DNSMasq configuration file $dnsmasq_file..."
     cp $(brew list dnsmasq | grep /dnsmasq.conf.example$) $dnsmasq_file
+    sudo chmod 644 $dnsmasq_file
     dnsmasq_restart_needed="true"
   fi
 
@@ -103,6 +104,7 @@ EOS
     echo "Creating 'test' resolver file at $resolver_file..."
     sudo mkdir -p "$(dirname $resolver_file)"
     sudo touch $resolver_file
+    sudo chmod 644 $resolver_file
     dnsmasq_restart_needed="true"
   fi
 
