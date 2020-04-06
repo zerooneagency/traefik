@@ -50,9 +50,9 @@ brew "nss"
 brew "dnsmasq"
 brew "yarn"
 brew "awscli"
+brew "docker-machine"
+brew "docker-compose"
 cask "docker"
-cask "docker-machine"
-cask "docker-compose"
 EOS
 
   title "Installing Watch CLI..."
