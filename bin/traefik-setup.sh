@@ -1,13 +1,13 @@
 #!/bin/sh
 #
 # This script should be run via curl:
-#   sh -c "$(curl -fsSL https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/setup.sh)"
+#   sh -c "$(curl -fsSL https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik-setup.sh)"
 # or wget:
-#   sh -c "$(wget -qO- https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/setup.sh)"
+#   sh -c "$(wget -qO- https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik-setup.sh)"
 #
 # As an alternative, you can first download the install script and run it afterwards:
-#   wget https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/setup.sh
-#   ./setup.sh
+#   wget https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik-setup.sh
+#   ./traefik-setup.sh
 #
 
 set -e
@@ -24,18 +24,8 @@ function title {
   echo ""
 }
 
-function setup_traefik {
-  traefik_path="${CODE_DIR:-$HOME}/.traefik"
-
-  # clone repository
-  if [ ! -d $traefik_path ]
-  then
-    title "Cloning Traefik repository to $traefik_path"
-    mkdir -p $traefik_path
-    git clone https://github.com/zerooneagency/traefik.git $traefik_path
-  fi
-
-  $traefik_path/bin/traefik.sh $@
+function warn {
+  echo "${yellow}[WARN] ${1}${reset}"
 }
 
 function setup {
@@ -73,7 +63,7 @@ EOS
 
   # get Traefik repo
   title "Installing Traefik..."
-  setup_traefik $@
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik) $@"
 
   # setup DNS
   title "Setting up DNSMasq..."
@@ -135,10 +125,15 @@ EOS
     sudo launchctl stop homebrew.mxcl.dnsmasq
     sudo launchctl start homebrew.mxcl.dnsmasq
 
-    echo "Done!"
-    title "NOTE: You will need to restart your computer for the DNS changes to take effect."
+    echo "DNSMasq configured."
+    echo ""
+    warn "You now need to restart your computer and re-run this script to finish the setup."
   else
     echo "DNSMasq already configured"
+
+    # get Traefik repo
+    title "Installing Traefik..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik) $@"
   fi
 }
 

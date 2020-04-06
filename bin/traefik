@@ -1,13 +1,13 @@
 #!/bin/sh
 #
 # This script should be run via curl:
-#   sh -c "$(curl -fsSL https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik.sh)"
+#   sh -c "$(curl -fsSL https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik)"
 # or wget:
-#   sh -c "$(wget -qO- https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik.sh)"
+#   sh -c "$(wget -qO- https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik)"
 #
 # As an alternative, you can first download the install script and run it afterwards:
-#   wget https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik.sh
-#   ./traefik.sh
+#   wget https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik
+#   ./traefik
 #
 
 set -e
@@ -70,7 +70,7 @@ function setup_traefik {
 
     # restart docker
     title "Restarting Traefik..."
-    docker-compose -f $traefik_path/docker-compose.yml down
+    docker-compose -f $traefik_path/docker-compose.yml down 2> /dev/null || true
   fi
 
   # start docker
