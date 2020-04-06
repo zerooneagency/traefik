@@ -10,11 +10,11 @@ Setup:
 **via curl**
 
 ```sh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik.sh)"
 ```
 
 **via wget**
 
 ```sh
-sh -c "$(wget -O- https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik)"
+sh -c "$(wget -O- https://raw.githubusercontent.com/zerooneagency/traefik/master/bin/traefik.sh)"
 ```
